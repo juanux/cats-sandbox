@@ -24,5 +24,4 @@ class TypeClassTest extends FlatSpec with Matchers{
 
   }
 
-
 }
