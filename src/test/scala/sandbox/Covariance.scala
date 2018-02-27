@@ -6,10 +6,15 @@ class Covariance extends FlatSpec with Matchers{
 
   trait Car{
     def getName():String
+    def startEngine():String
   }
 
-  trait Volkswagen extends Car
-  trait Chevrolet extends Car
+  trait Volkswagen extends Car{
+    override def startEngine():String = "Start engine Volkswagen"
+  }
+  trait Chevrolet extends Car{
+    override def startEngine():String = "Start engine Chevrolet"
+  }
 
   case class Sail() extends Chevrolet{
     override def getName():String = "Sail"
@@ -33,7 +38,29 @@ class Covariance extends FlatSpec with Matchers{
 
   }
 
+  def startEngineVolkswagen[A <: Volkswagen](car:A): String ={
+     car.startEngine()
 
+  }
+
+  def startEngineChevrolet[A <: Chevrolet](car:A): String ={
+    car.startEngine()
+
+  }
+
+
+
+  "Start engine chevrolet " should "start engine only for Chevrolet cars " in{
+    startEngineChevrolet(Sail()) shouldBe "Start engine Chevrolet"
+    startEngineChevrolet(Sonic()) shouldBe "Start engine Chevrolet"
+
+  }
+
+  "Start engine volkswagen " should "start engine only for Volkswagen cars " in{
+    startEngineVolkswagen(Polo()) shouldBe "Start engine Volkswagen"
+    startEngineVolkswagen(Jetta()) shouldBe "Start engine Volkswagen"
+
+  }
 
 
   "Jetta vehicle type " should " should have Jetta name for the co - varience type Vehicle parametrized with Volkswagen" in {
@@ -71,6 +98,7 @@ class Covariance extends FlatSpec with Matchers{
 
 
   }
+
 
 
 
