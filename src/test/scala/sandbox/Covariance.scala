@@ -74,27 +74,27 @@ class Covariance extends FlatSpec with Matchers{
 
   "Polo vehicle type " should " should have Polo name for the co - varience type Vehicle parametrized with Volkswagen" in {
 
-    val vehicleJetta = new Vehicle[Volkswagen](Polo())
+    val vehiclePolo = new Vehicle[Volkswagen](Polo())
 
-    vehicleJetta.vehicleType.getName() shouldBe "Polo"
+    vehiclePolo.vehicleType.getName() shouldBe "Polo"
 
 
   }
 
   "Sail vehicle type " should " should have Sail name for the co - varience type Vehicle parametrized with Chevrolet" in {
 
-    val vehicleJetta = new Vehicle[Chevrolet](Sail())
+    val vehicleSail = new Vehicle[Chevrolet](Sail())
 
-    vehicleJetta.vehicleType.getName() shouldBe "Sail"
+    vehicleSail.vehicleType.getName() shouldBe "Sail"
 
 
   }
 
   "Sonic vehicle type " should " should have Sonic name for the co - varience type Vehicle parametrized with Chevrolet" in {
 
-    val vehicleJetta = new Vehicle[Chevrolet](Sail())
+    val vehicleSonic = new Vehicle[Chevrolet](Sonic())
 
-    vehicleJetta.vehicleType.getName() shouldBe "Sail"
+    vehicleSonic.vehicleType.getName() shouldBe "Sonic"
 
 
   }
