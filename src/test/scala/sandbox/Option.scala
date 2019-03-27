@@ -96,11 +96,25 @@ class Option extends FlatSpec with Matchers{
 
   }
 
+  "Option flatMap" should "(composing options Returns the result of applying $f to this $option's value if this $option is nonempty.* Returns $none if this $option is empty. Slightly different from `map` in that $f is expected to return an $option (which could be $none)." in {
+    val op1 = Option(1)
+    val op2 = Option(2)
+    val op3 = Option(3)
+
+    op1.flatMap(x => op2.flatMap(y => Option(x + y).flatMap(z => op3.flatMap(s => Option(z + s))))) shouldBe Option(6)
+
+  }
+
   "Option map" should "(with different types) Returns the result of applying $f to this $option's value if this $option is nonempty.* Returns $none if this $option is empty. Slightly different from `map` in that $f is expected to return an $option (which could be $none)." in {
     Option(1).map(x=> 1*2) shouldBe Option(2)
     Option(1).map(x=> 1*2).map(y=> (y*2).toString) shouldBe Option(4.toString)
     Option.empty[Int].map(x=> 1*2).map(y=> (y*2).toString) shouldBe None
 
+
+  }
+
+  "Option flatten" should "Returns the result of applying $f to this $option's value if this $option is nonempty. Returns $none if this $option is empty.  Slightly different from `map` in that $f is expected to return an $option (which could be $none)." in {
+    Option(Option(1)).flatMap(x=> Option(x.map(_*2))).flatten shouldBe Option(2)
 
   }
 
