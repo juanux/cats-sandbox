@@ -109,15 +109,10 @@ class OptionTest extends FlatSpec with Matchers{
     Option(1).map(x=> 1*2) shouldBe Option(2)
     Option(1).map(x=> 1*2).map(y=> (y*2).toString) shouldBe Option(4.toString)
     Option.empty[Int].map(x=> 1*2).map(y=> (y*2).toString) shouldBe None
-
-
   }
 
   "Option flatten" should "Returns the result of applying $f to this $option's value if this $option is nonempty. Returns $none if this $option is empty.  Slightly different from `map` in that $f is expected to return an $option (which could be $none)." in {
     Option(Option(1)).flatMap(x=> Option(x.map(_*2))).flatten shouldBe Option(2)
   }
-
-
-
 
 }
