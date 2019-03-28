@@ -2,7 +2,7 @@ package sandbox
 
 import org.scalatest.{FlatSpec, Matchers}
 
-class Option extends FlatSpec with Matchers{
+class OptionTest extends FlatSpec with Matchers{
 
   "Option fold" should "Returns the result of applying $f to this $option's value if the $option is nonempty.  Otherwise, evaluates expression `ifEmpty`." in {
     Option("a").fold("Nothing")(value=> "Some value") shouldBe "Some value"
