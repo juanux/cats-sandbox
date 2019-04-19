@@ -69,4 +69,20 @@ class General  extends FlatSpec with Matchers{
 
   }
 
+   "isSorted function " should "return true for sorted list of strings according the lenght" in {
+
+    val list:Array[String] = Array("1","32","222","2224","22225","222226","72222222")
+
+    isSorted[String](list,(a:String,b:String)=> a.size>=b.size) shouldBe true
+
+  }
+
+  "isSorted function " should "return false for unsorted list of strings according the lenght" in {
+
+    val list:Array[String] = Array("1","32","222","2224","225","222226","7222222")
+
+    isSorted[String](list,(a:String,b:String)=> a.size>=b.size) shouldBe false
+
+  }
+
 }
