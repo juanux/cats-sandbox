@@ -40,8 +40,33 @@ class General  extends FlatSpec with Matchers{
 
   def isSorted[A](as: Array[A],ordered:(A,A) => Boolean) : Boolean ={
 
+     
+      @tailrec
+      def go(n:Int): Boolean = {
+        if(n == 0) true
+        else if(ordered(as(n),as(n-1))) go(n-1)
+        else false
+      }
 
-   ???
+      if(as.size == 1) true
+      else go(as.size -1)
+
+  }
+
+  "isSorted function " should "return true for sorted list a > b" in {
+
+    val list:Array[Int] = Array(1,2,3,4,5,6,7)
+
+    isSorted[Int](list,(a:Int,b:Int)=> a>b) shouldBe true
+
+  }
+
+  "isSorted function " should "return false for unsorted list a > b" in {
+
+    val list:Array[Int] = Array(1,3,2,4,5,6,7)
+
+    isSorted[Int](list,(a:Int,b:Int)=> a>b) shouldBe false
+
   }
 
 }
