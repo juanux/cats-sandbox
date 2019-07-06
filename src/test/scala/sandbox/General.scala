@@ -53,6 +53,10 @@ class General  extends FlatSpec with Matchers{
 
   }
 
+  def curry[A,B,C](f: (A,B) => C): A => (B => C) = (a:A) => f(a,_:B)
+
+  def uncurry[A,B,C](f:A => B => C): (A,B) =>  C = (a:A)
+
   "isSorted function " should "return true for sorted list a > b" in {
 
     val list:Array[Int] = Array(1,2,3,4,5,6,7)
