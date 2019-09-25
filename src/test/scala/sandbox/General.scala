@@ -53,10 +53,17 @@ class General  extends FlatSpec with Matchers{
 
   }
 
-  def curry[A,B,C](f: (A,B) => C): A => (B => C) = (a:A) => f(a,_:B)
+  def curry[A,B,C](f: (A,B) => C): A => (B => C) = (a:A) => (b:B) => f(a,b)
 
-  def uncurry[A,B,C](f:A => B => C): (A,B) =>  C = (a:A)
+  def uncurry[A,B,C](f:A => B => C): (A,B) =>  C =  (a:A,b:B) => f(a)(b)
 
+  def compose[A,B,C](f:B=> C, g: A => B): A => C = (a:A) => f(g(a))
+
+  def modN(n: Int)=(x: Int) => ((x % n) == 0) //This is the same that ´def modN(n: Int)(x: Int) = ((x % n) == 0)´ 
+
+  def max(n:Int) = (m:Int) => Math.max(n,m) 
+  def max2(n:Int)(m:Int) = Math.max(n,m)
+     
   "isSorted function " should "return true for sorted list a > b" in {
 
     val list:Array[Int] = Array(1,2,3,4,5,6,7)
