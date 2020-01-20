@@ -1,4 +1,4 @@
-package sandbox.algorithms
+package sandbox.general.algorithms
 
 import org.scalatest.{FlatSpec, Matchers}
 
