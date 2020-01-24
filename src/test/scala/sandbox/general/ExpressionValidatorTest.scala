@@ -9,21 +9,21 @@ class ExpressionValidatorTest extends FunSuite with Matchers {
   object ExpressionValidator {
     import scala.annotation.tailrec
 
-    private val matchingBrackets = Map('(' -> ')', '{' -> '}', '[' -> ']')
-    private val openBrackets = matchingBrackets.keySet
+    private val matchingBrackets: Map[Char, Char] = Map('(' -> ')','{' -> '}','[' -> ']')
+    private val openingBrackets: Set[Char] = matchingBrackets.keySet
 
-    def validate(input: String): Boolean = {
-
+    def validate(exp:String):Boolean = {
       @tailrec
-      def isValid(input: List[Char], stack: List[Char] = Nil): Boolean = (input, stack) match {
-        case (nextBracket +: tail, _) if openBrackets.contains(nextBracket) => isValid(tail, nextBracket +: stack)
-        case (nextBracket +: tail, lastBracket +: stackTail) if matchingBrackets(lastBracket) == nextBracket => isValid(tail, stackTail)
+      def isValid(exp: List[Char], stack: List[Char] = Nil): Boolean = (exp,stack) match{
+        case (headExp:: tailExp, _) if openingBrackets.contains(headExp) =>isValid(tailExp, headExp :: stack)
+        case (headExp:: tailExp, headStack:: tailStack) if matchingBrackets(headStack) == headExp => isValid(tailExp, tailStack)
         case (Nil, _) => stack.isEmpty
         case _ => false
       }
 
-      input.length % 2 == 0 && isValid(input.toCharArray.toList)
+      exp.toCharArray.length % 2 == 0 && isValid(exp.toCharArray.toList)
     }
+
   }
 
   test("validate") {
@@ -41,7 +41,7 @@ class ExpressionValidatorTest extends FunSuite with Matchers {
       ("({)", false),
       ("(]", false),
       ("({[(])})", false),
-        ("({[()]}())", true)
+        ("([()])", true)
     )
 
     forAll(inputs) { case (input, expected) => ExpressionValidator.validate(input) shouldBe expected }
