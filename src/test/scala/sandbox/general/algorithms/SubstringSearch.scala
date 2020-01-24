@@ -9,7 +9,7 @@ class SubstringSearch extends FlatSpec with Matchers {
     val text = "Hola como estas, yo muy bien y tu que tal"
     val pattern = "yo muy bien"
 
-    SubstringSearch.naiveSubstringSearch("Hola como estas, yo muy bien y tu que tal", "yo muy bien")
+    SubstringSearch.naiveSubstringSearch(text, "yo muy bien")
     text.indexOf(pattern)
   }
 
