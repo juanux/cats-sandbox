@@ -41,7 +41,8 @@ class ExpressionValidatorTest extends FunSuite with Matchers {
       ("({)", false),
       ("(]", false),
       ("({[(])})", false),
-        ("([()])", true)
+      ("([()])", true),
+      (")))(((]]][[[", false)
     )
 
     forAll(inputs) { case (input, expected) => ExpressionValidator.validate(input) shouldBe expected }
