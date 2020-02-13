@@ -1,40 +1,38 @@
+trait Power[A]{
 
-trait UpperInverse[A]{
-
-  def toUpperInverse(a:A):A
-
-}
-
-object UpperInverseInstances{
-
-  implicit val stringToUpperInverse = new UpperInverse[String]{
-
-    def toUpperInverse(a:String):String = a.reverse.toUpperCase()
-
-  }
-
-
-  implicit val intToUpperInverse = new UpperInverse[Int]{
-
-    def toUpperInverse(a:Int):Int = 4
-
-  }
+  def power(a:A):A
 
 }
 
-object UpperInverseSyntax {
-  implicit class UpperInverseOps[A](a:A){
+object PowerInstance{
 
-    def toUpperInverse(implicit instance:UpperInverse[A] ) = instance.toUpperInverse(a)
-
+  implicit val powerInt: Power[Int] = new Power[Int]{
+    def power(a:Int):Int = a*a
   }
+
+
+  implicit val powerDouble: Power[Double] = new Power[Double]{
+    def power(a:Double):Double = a*a
+  }
+
+  implicit val powerLong: Power[Long] = new Power[Long]{
+    def power(a:Long):Long = a*a
+  }
+
+
 
 }
 
+object PowerOps{
 
-import UpperInverseInstances._
-import UpperInverseSyntax._
+  implicit class PowerSyntax[A](a:A){
+    def power(implicit power:Power[A]):A = power.power(a)
+  }
+}
 
-"aaabbbccc".toUpperInverse
 
-9.toUpperInverse
+import PowerInstance._
+import PowerOps._
+
+4.power
+4l.power

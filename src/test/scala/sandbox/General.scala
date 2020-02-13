@@ -20,7 +20,6 @@ class General  extends FlatSpec with Matchers{
 
   }
 
-
   "fib function " should "return a the sum of the 2 previous numbers" in {
 
     fib(0) shouldBe 0
